@@ -41,14 +41,14 @@ static const char *const autostart[] = {
     "flameshot", NULL,
     "dunst", NULL,
     "picom", "-b", NULL,
-    "sh", "-c", "feh --randomize --bg-fill ~/Pictures/backgrounds/*", NULL,
-    "synergy", NULL,
+    "sh", "-c", "feh --randomize --bg-fill ~/Images/backgrounds/*", NULL,
+/*    "synergy", NULL,*/
     "slstatus", NULL,
     NULL /* terminate */
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
 
 static const char ptagf[] = "[%s %s]";  /* format of a tag label */
 static const char etagf[] = "[%s]";     /* format of an empty tag */
@@ -99,8 +99,8 @@ static Key keys[] = {
     { MODKEY,                       XK_Return,                 spawn,          {.v = launchercmd} },
     { MODKEY|ControlMask,           XK_r,                      spawn,          SHCMD ("protonrestart")},
     { MODKEY,                       XK_t,                      spawn,          {.v = termcmd } },
-    { MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p /media/drive/Screenshots/")},
-    { MODKEY|ShiftMask,             XK_p,                      spawn,          SHCMD ("flameshot gui -p /media/drive/Screenshots/")},
+    { MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p ~/Images/")},
+    { MODKEY|ShiftMask,             XK_p,                      spawn,          SHCMD ("flameshot gui -p ~/Images/")},
     { MODKEY|ControlMask,           XK_p,                      spawn,          SHCMD ("flameshot gui --clipboard")},
     { MODKEY,                       XK_c,                      spawn,          SHCMD ("looking-glass-client -F")},
     { MODKEY|ShiftMask,             XK_i,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/Images/backgrounds/kimbox/*")},
@@ -130,7 +130,7 @@ static Key keys[] = {
     { MODKEY,                       XK_space,                  setlayout,      {0} },
     { MODKEY|ShiftMask,             XK_m,                      togglefloating, {0} },
     { MODKEY|ShiftMask,             XK_y,                      togglefakefullscreen, {0} },
-    { MODKEY,                       XK_KP_Equal,               view,           {.ui = ~0 } },
+    { MODKEY,                       XK_equal,                  view,           {.ui = ~0 } },
     { MODKEY,                       XK_Left,                   focusmon,       {.i = -1 } },
     { MODKEY,                       XK_Right,                  focusmon,       {.i = +1 } },
     { MODKEY|ShiftMask,             XK_Left,                   tagmon,         {.i = -1 } },
@@ -139,11 +139,11 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_q,                      spawn,          SHCMD("$HOME/.config/rofi/powermenu.sh")},
     { MODKEY|ControlMask|ShiftMask, XK_r,                      spawn,          SHCMD("systemctl reboot")},
     { MODKEY|ControlMask|ShiftMask, XK_s,                      spawn,          SHCMD("systemctl suspend")},
-    { MODKEY,                       XK_t,                      spawn,          SHCMD("alacritty") },
     { MODKEY,                       XK_f,                      spawn,          SHCMD("flatpak run org.mozilla.firefox") },
     { MODKEY,                       XK_b,                      spawn,          SHCMD("flatpak run com.brave.Browser") },
     { MODKEY,                       XK_w,                      spawn,          SHCMD("flatpak run io.gitlab.librewolf-community") },
     { MODKEY,                       XK_e,                      spawn,          SHCMD("pcmanfm") },
+    { MODKEY,                       XK_j,                      spawn,          SHCMD("lutris") },
     { MODKEY,                       XK_s,                      spawn,          SHCMD("flatpak run com.github.micahflee.torbrowser-launcher") },
     { MODKEY,                       XK_l,                      spawn,          SHCMD("betterlockscreen -l blur --blur 0.7") },
     TAGKEYS(                        XK_1,                      0)
@@ -156,6 +156,55 @@ static Key keys[] = {
     TAGKEYS(                        XK_8,                      7)
     TAGKEYS(                        XK_9,                      8)
     TAGKEYS(                        XK_0,                      9)
+    { MODKEY,                       XK_1,      view,           {.ui = 1 << 0} },
+    { MODKEY|ControlMask,           XK_1,      toggleview,     {.ui = 1 << 0} },
+    { MODKEY|ShiftMask,             XK_1,      tag,            {.ui = 1 << 0} },
+    { MODKEY|ControlMask|ShiftMask, XK_1,      toggletag,      {.ui = 1 << 0} },
+
+    { MODKEY,                       XK_2,      view,           {.ui = 1 << 1} },
+    { MODKEY|ControlMask,           XK_2,      toggleview,     {.ui = 1 << 1} },
+    { MODKEY|ShiftMask,             XK_2,      tag,            {.ui = 1 << 1} },
+    { MODKEY|ControlMask|ShiftMask, XK_2,      toggletag,      {.ui = 1 << 1} },
+
+    { MODKEY,                       XK_3,      view,           {.ui = 1 << 2} },
+    { MODKEY|ControlMask,           XK_3,      toggleview,     {.ui = 1 << 2} },
+    { MODKEY|ShiftMask,             XK_3,      tag,            {.ui = 1 << 2} },
+    { MODKEY|ControlMask|ShiftMask, XK_3,      toggletag,      {.ui = 1 << 2} },
+
+    { MODKEY,                       XK_4,      view,           {.ui = 1 << 3} },
+    { MODKEY|ControlMask,           XK_4,      toggleview,     {.ui = 1 << 3} },
+    { MODKEY|ShiftMask,             XK_4,      tag,            {.ui = 1 << 3} },
+    { MODKEY|ControlMask|ShiftMask, XK_4,      toggletag,      {.ui = 1 << 3} },
+
+    { MODKEY,                       XK_5,      view,           {.ui = 1 << 4} },
+    { MODKEY|ControlMask,           XK_5,      toggleview,     {.ui = 1 << 4} },
+    { MODKEY|ShiftMask,             XK_5,      tag,            {.ui = 1 << 4} },
+    { MODKEY|ControlMask|ShiftMask, XK_5,      toggletag,      {.ui = 1 << 4} },
+
+    { MODKEY,                       XK_6,      view,           {.ui = 1 << 5} },
+    { MODKEY|ControlMask,           XK_6,      toggleview,     {.ui = 1 << 5} },
+    { MODKEY|ShiftMask,             XK_6,      tag,            {.ui = 1 << 5} },
+    { MODKEY|ControlMask|ShiftMask, XK_6,      toggletag,      {.ui = 1 << 5} },
+
+    { MODKEY,                       XK_7,      view,           {.ui = 1 << 6} },
+    { MODKEY|ControlMask,           XK_7,      toggleview,     {.ui = 1 << 6} },
+    { MODKEY|ShiftMask,             XK_7,      tag,            {.ui = 1 << 6} },
+    { MODKEY|ControlMask|ShiftMask, XK_7,      toggletag,      {.ui = 1 << 6} },
+
+    { MODKEY,                       XK_8,      view,           {.ui = 1 << 7} },
+    { MODKEY|ControlMask,           XK_8,      toggleview,     {.ui = 1 << 7} },
+    { MODKEY|ShiftMask,             XK_8,      tag,            {.ui = 1 << 7} },
+    { MODKEY|ControlMask|ShiftMask, XK_8,      toggletag,      {.ui = 1 << 7} },
+
+    { MODKEY,                       XK_9,      view,           {.ui = 1 << 8} },
+    { MODKEY|ControlMask,           XK_9,      toggleview,     {.ui = 1 << 8} },
+    { MODKEY|ShiftMask,             XK_9,      tag,            {.ui = 1 << 8} },
+    { MODKEY|ControlMask|ShiftMask, XK_9,      toggletag,      {.ui = 1 << 8} },
+
+    { MODKEY,                       XK_0,      view,           {.ui = 1 << 9} },
+    { MODKEY|ControlMask,           XK_0,      toggleview,     {.ui = 1 << 9} },
+    { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = 1 << 9} },
+    { MODKEY|ControlMask|ShiftMask, XK_0,      toggletag,      {.ui = 1 << 9} },
 };
 
 /* button definitions */
