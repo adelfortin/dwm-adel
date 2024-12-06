@@ -4,7 +4,13 @@
 static const unsigned int refresh_rate        = 60;  /* matches dwm's mouse event processing to your monitor's refresh rate for smoother window interactions */
 static const unsigned int enable_noborder     = 1;   /* toggles noborder feature (0=disabled, 1=enabled) */
 static const unsigned int borderpx            = 1;   /* border pixel of windows */
-static const unsigned int snap                = 26;  /* snap pixel */
+static const unsigned int snap                = 36;  /* snap pixel */
+static const unsigned int cornerrad           = 4;
+static const unsigned int gappih              = 25;
+static const unsigned int gappiv              = 25;
+static const unsigned int gappoh              = 25;
+static const unsigned int gappov              = 25;
+static const int smartgaps                    = 1;
 static const int swallowfloating              = 1;   /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning      = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft       = 0;   /* 0: systray in the right corner, >0: systray on left of status text */
@@ -145,7 +151,7 @@ static Key keys[] = {
     { MODKEY,                       XK_e,                      spawn,          SHCMD("pcmanfm") },
     { MODKEY,                       XK_j,                      spawn,          SHCMD("lutris") },
     { MODKEY,                       XK_s,                      spawn,          SHCMD("flatpak run com.github.micahflee.torbrowser-launcher") },
-    { MODKEY,                       XK_l,                      spawn,          SHCMD("betterlockscreen -l blur --blur 0.7") },
+    { MODKEY,                       XK_l,                      spawn,          SHCMD("i3lock-fancy") },
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
