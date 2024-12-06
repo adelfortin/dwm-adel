@@ -2043,21 +2043,40 @@ resizebarwin(Monitor *m) {
 void
 resizeclient(Client *c, int x, int y, int w, int h)
 {
-	XWindowChanges wc;
+    XWindowChanges wc;
 
-	c->oldx = c->x; c->x = wc.x = x;
-	c->oldy = c->y; c->y = wc.y = y;
-	c->oldw = c->w; c->w = wc.width = w;
-	c->oldh = c->h; c->h = wc.height = h;
-	wc.border_width = c->bw;
-	if (noborder(c) && enable_noborder) {
-		wc.width += c->bw * 2;
-		wc.height += c->bw * 2;
-		wc.border_width = 0;
-	}
-	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
-	configure(c);
-	XSync(dpy, False);
+    // Appliquer les gaps (intérieurs et extérieurs)
+    if (enable_noborder) {
+        x += gappov; // Gap extérieur horizontal
+        y += gappoh; // Gap extérieur vertical
+        w -= 2 * gappov; // Réduction de la largeur pour le gap horizontal
+        h -= 2 * gappoh; // Réduction de la hauteur pour le gap vertical
+    }
+
+    // Réduire la taille pour les coins arrondis (si `cornerrad` est actif)
+    if (cornerrad > 0) {
+        x += cornerrad;
+        y += cornerrad;
+        w -= 2 * cornerrad;
+        h -= 2 * cornerrad;
+    }
+
+    c->oldx = c->x; c->x = wc.x = x;
+    c->oldy = c->y; c->y = wc.y = y;
+    c->oldw = c->w; c->w = wc.width = w;
+    c->oldh = c->h; c->h = wc.height = h;
+    wc.border_width = c->bw;
+
+    if (noborder(c) && enable_noborder) {
+        wc.width += c->bw * 2;
+        wc.height += c->bw * 2;
+        wc.border_width = 0;
+    }
+
+    // Appliquer les nouvelles dimensions
+    XConfigureWindow(dpy, c->win, CWX | CWY | CWWidth | CWHeight | CWBorderWidth, &wc);
+    configure(c);
+    XSync(dpy, False);
 }
 
 void
@@ -3646,6 +3665,15 @@ systraytomon(Monitor *m) {
 	if(systraypinningfailfirst && n < systraypinning)
 		return mons;
 	return t;
+}
+
+void drawroundedrect(Display *dpy, Drawable d, GC gc, int x, int y, unsigned int w, unsigned int h, unsigned int rad) {
+    XFillArc(dpy, d, gc, x, y, rad * 2, rad * 2, 64 * 90, 64 * 90);
+    XFillArc(dpy, d, gc, x + w - rad * 2, y, rad * 2, rad * 2, 64 * 0, 64 * 90);
+    XFillArc(dpy, d, gc, x, y + h - rad * 2, rad * 2, rad * 2, 64 * 180, 64 * 90);
+    XFillArc(dpy, d, gc, x + w - rad * 2, y + h - rad * 2, rad * 2, rad * 2, 64 * 270, 64 * 90);
+    XFillRectangle(dpy, d, gc, x + rad, y, w - rad * 2, h);
+    XFillRectangle(dpy, d, gc, x, y + rad, w, h - rad * 2);
 }
 
 void
