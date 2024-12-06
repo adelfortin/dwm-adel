@@ -1,0 +1,64 @@
+/**
+ * Kimbox rofi theme
+ * Adapted for Kimbox color scheme
+ * Based on Nordic theme
+ */
+
+* {
+    kimbox0: #231A0C; /* burnt_coffee */
+    kimbox1: #362712; /* bg2 */
+    kimbox2: #5E452B; /* bg4 */
+    kimbox3: #7E602C; /* coyote_brown */
+
+    kimbox4: #C2A383; /* fg3 */
+    kimbox5: #D9AE80; /* fg0 */
+    kimbox6: #FFE9D4; /* light_fg */
+
+    kimbox7: #7EB2B1; /* aqua */
+    kimbox8: #4C96A8; /* blue */
+    kimbox9: #819C3B; /* green */
+    kimbox10: #FF9500; /* yellow */
+    kimbox11: #EF1D55; /* red */
+
+    kimbox12: #FF5813; /* orange */
+    kimbox13: #A06469; /* magenta */
+    kimbox14: #7E602C; /* brown */
+    kimbox15: #5E452B; /* dark_brown */
+
+    foreground: @kimbox4;
+    backlight:  #ccffeedd;
+    background-color: transparent;
+
+    highlight: underline bold @kimbox5;
+
+    transparent: rgba(35, 26, 12, 0);
+}
+
+window {
+    location: center;
+    anchor: center;
+    transparency: "screenshot";
+    padding: 10px;
+    border: 0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children: [mainbox];
+    orientation: horizontal;
+}
+
+mainbox {
+    spacing: 0;
+    children: [inputbar, message, listview];
+}
+
+message {
+    color: @kimbox0;
+    padding: 5;
+    border-color: @foreground;
+    border: 0px 2px 2px 2px;
+    background-color: @kimbox7;
+}
+
+inputbar {
