@@ -3,13 +3,13 @@
 /* appearance */
 static const unsigned int refresh_rate        = 60;  /* matches dwm's mouse event processing to your monitor's refresh rate for smoother window interactions */
 static const unsigned int enable_noborder     = 1;   /* toggles noborder feature (0=disabled, 1=enabled) */
-static const unsigned int borderpx            = 1;   /* border pixel of windows */
-static const unsigned int snap                = 36;  /* snap pixel */
-static const unsigned int cornerrad           = 4;
-static const unsigned int gappih              = 25;
-static const unsigned int gappiv              = 25;
-static const unsigned int gappoh              = 25;
-static const unsigned int gappov              = 25;
+static const unsigned int borderpx            = 3;   /* border pixel of windows */
+static const unsigned int snap                = 14;  /* snap pixel */
+static const unsigned int cornerrad           = 2;
+static const unsigned int gappih              = 2;
+static const unsigned int gappiv              = 5;
+static const unsigned int gappoh              = 2;
+static const unsigned int gappov              = 2;
 static const int smartgaps                    = 1;
 static const int swallowfloating              = 1;   /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning      = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -24,11 +24,13 @@ static const int topbar                       = 1;   /* 0 means bottom bar */
 #define SHOWWINICON                           1      /* 0 means no winicon */
 static const char *fonts[]                    = { "MesloLGS Nerd Font Mono:size=16", "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true" };
 
+
 // Couleurs Kimbox
 static const char normbordercolor[]           = "#362712"; // bg2
 static const char normbgcolor[]               = "#231A0C"; // burnt_coffee
 static const char normfgcolor[]               = "#C2A383"; // fg3
-static const char selbordercolor[]            = "#5E452B"; // bg4
+/*static const char selbordercolor[]            = "#5E452B"; // bg4*/
+static const char selbordercolor[]            = "#819C3B"; // bg4
 static const char selbgcolor[]                = "#5E452B"; // bg4
 static const char selfgcolor[]                = "#D9AE80"; // fg0
 
